@@ -8,13 +8,28 @@ env:
   secret: ${{ secrets.secret }}
 jobs:
   build:
+  env:
+    name2: test2
+    
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 
-      - run: ls
+      - run: echo $name3
+        env:
+          name3: test3
 
-      - run: touch new.txt
-      
+      - run: |
+          chmod +x build.sh
+          ./build.sh
+
+      - run: |
+          chmod +x test.sh
+          ./test.sh
+
+      - run: |
+          chmod +x deploy.sh
+          ./deploy.sh
+
       - run: ls
